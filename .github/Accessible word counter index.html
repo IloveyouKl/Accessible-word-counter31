@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Word Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            margin: auto;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: monospace;
+        }
+        .button {
+            padding: 12px 20px;
+            margin: 10px 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+        .count-btn {
+            background: linear-gradient(45deg, #4CAF50, #2E8B57);
+            color: white;
+        }
+        .count-btn:hover { background: #2E8B57; }
+
+        .link-btn {
+            background: linear-gradient(45deg, #007BFF, #0056b3);
+            color: white;
+        }
+        .link-btn:hover { background: #0056b3; }
+
+        .dark-mode {
+            background-color: #222;
+            color: white;
+        }
+        .dark-mode .container { background: #333; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🔤 Accessible Word Counter</h2>
+        <textarea id="textInput" placeholder="Enter or Paste Your Text..."></textarea>
+        <br>
+        <button class="button count-btn" onclick="countWords()">🔢 Count</button>
+        <br><br>
+        <p id="result"></p>
+
+        <hr>
+
+        <h3>🔗 Connect with Us</h3>
+        <button class="button link-btn" onclick="openLink('https://t.me/shopnotamal')">📢 Telegram Channel</button>
+        <button class="button link-btn" onclick="openLink('https://t.me/AccessibleResource')">💬 Feedback</button>
+        <br>
+        <button class="button count-btn" onclick="toggleMode()">🌙 Dark/Light Mode</button>
+    </div>
+
+    <script>
+        function countWords() {
+            let text = document.getElementById("textInput").value;
+            let charCount = text.length;
+            let wordCount = text.trim().split(/\s+/).length;
+            let paragraphCount = text.split(/\n+/).filter(p => p.trim() !== "").length;
+            let punctuationCount = (text.match(/[.,!?;:]/g) || []).length;
+
+            document.getElementById("result").innerHTML = `
+                📝 Characters: ${charCount}<br>
+                🏷️ Words: ${wordCount}<br>
+                📄 Paragraphs: ${paragraphCount}<br>
+                🔣 Punctuation: ${punctuationCount}
+            `;
+        }
+
+        function openLink(url) {
+            window.open(url, "_blank", "noopener,noreferrer");
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+
+</body>
+</html>
